@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        PATH = "/opt/maven/latest/bin/"
+        PATH = "/opt/maven/latest/bin:$PATH"
     }
     stages {
         stage('Build') {
@@ -15,7 +15,7 @@ pipeline {
             }
             post {
                 always {
-                    junit 'target/surefire-reports/*.xml'
+                    junit '**/target/surefire-reports/*.xml' // Changed the path to include subdirectories
                 }
             }
         }
